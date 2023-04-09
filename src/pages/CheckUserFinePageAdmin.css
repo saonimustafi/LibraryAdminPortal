@@ -29,7 +29,7 @@
     padding-bottom: 15px;
     padding-top: 15px;
     text-align: center;
-    font-variant: all-small-caps;
+    /* font-variant: all-small-caps; */
   }
   
   @media screen and (max-width: 768px) {
@@ -89,6 +89,6 @@
     cursor: pointer;
   }
   
-  button:hover {
+  #myButtonFine:hover {
     background-color: #3e8e41;
   }

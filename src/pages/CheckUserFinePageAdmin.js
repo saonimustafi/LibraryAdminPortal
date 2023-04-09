@@ -76,7 +76,7 @@ const Example = () => {
     return(
         <>
             <div>
-                <h2 className="fine-table-header">User Fine</h2>
+                <h2 className="fine-table-admin-header">User Fine</h2>
                 <form className = 'fine-table-admin-form' onSubmit={handleShowActivity}>
                     <label className = 'fine-table-admin-label' htmlFor = "fineUserEmail">User Name:</label>
                     <input type = "text" id = "fineUserEmailInput" name="fineUserEmail"></input>
