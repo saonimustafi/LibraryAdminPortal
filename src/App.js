@@ -6,6 +6,8 @@ import RegisterUserPage from './pages/RegisterUserPage';
 import SignInPage from './pages/SignInPage';
 import UserActivitiesPageAdmin from './pages/UserActivitiesPageAdmin';
 import CheckUserFinePageAdmin from './pages/CheckUserFinePageAdmin';
+import AddBookPage from './pages/AddBookPage';
+import DeleteBookPage from './pages/DeleteBookPage';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/books/:id" element={<BookDetailPage />} />
           <Route path="/userActivitiesAdmin" element={<UserActivitiesPageAdmin />} />
           <Route path="/checkUserFineAdmin" element={<CheckUserFinePageAdmin />} />
+          <Route path="/addBookAdmin" element={<AddBookPage/>} />
+          <Route path="/deleteBookAdmin" element={<DeleteBookPage />} />
         </Routes>
       </div>
     </Router>

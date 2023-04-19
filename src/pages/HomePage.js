@@ -4,12 +4,15 @@ import Book from '../components/Book';
 import TopNav from '../components/TopNav';
 import { books } from '../data/books';
 import './HomePage.css';
+import './AddBookPage.js'
+import AddBookPage from './AddBookPage.js';
 
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [expanded, setExpanded] = useState(false);
   const searchRef = useRef(null);
   const navigate = useNavigate();
+
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -31,6 +34,7 @@ function HomePage() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
 
   return (
     <div className="home-page">
