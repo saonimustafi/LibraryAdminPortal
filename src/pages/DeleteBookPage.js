@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import TopNav from '../components/TopNav'
 // import { useParams } from 'react-router-dom'
 import './DeleteBookPage.css'
 
@@ -24,6 +25,7 @@ const DeleteBookPage = () => {
     }
   return (
     <div>
+        <TopNav />
         <div>
             <h2 className = 'admin-delete-book-header'>Delete Book</h2>
         </div>

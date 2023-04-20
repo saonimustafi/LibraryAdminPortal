@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import TopNav from '../components/TopNav'
 import './AddBookPage.css'
+import TopNav from '../components/TopNav'
 
 const AddBookPage = () => {
     const [image, setImage] = useState('')
@@ -7,7 +9,6 @@ const AddBookPage = () => {
     const [author, setAuthor] = useState('')
     const [category, setCategory] = useState('')
     const [count, setCount] = useState(0)
-    const [message, setMessage] = useState('')
     const [addBookResponse, setAddBookResponse] = useState(null)
     
 
@@ -26,15 +27,12 @@ const AddBookPage = () => {
         setAddBookResponse(responseData)
 
         if(response.status === 201) {
-            setMessage("Book has been added");
             alert("Book has been added")
         }
         else if (response.status === 200 && responseData.message === "Book already exists, please increase the count") {
-            setMessage("Book already exists. Please increase the count!")
             alert("Book already exists, please increase the count")
         }
         else if(addBookResponse.message === "Book validation failed") {
-            setMessage("Please enter all the details before submitting the form")
             alert("Please enter all the details before submitting the form")
         }
     }
@@ -42,6 +40,7 @@ const AddBookPage = () => {
   return (
     <>
     <div>
+    <TopNav />
         <div>
             <h2 className = 'admin-add-book-header'>Add Book</h2>
         </div>
