@@ -1,0 +1,96 @@
+.admin-update-book-count-header {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    align-items: center;
+    text-align: center;
+    font-variant: all-small-caps;
+}
+
+.admin-update-book-count-form {
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 600px;
+  }
+
+  /* .admin-delete-book-header {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-align: center;
+    font-variant: all-small-caps;
+  } */
+  
+  /* .admin-add-book-div {
+    margin-bottom: 20px;
+  } */
+  
+  .admin-update-book-count-div {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+  }
+  
+ .admin-update-book-count-label {
+    /* padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box; */
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .admin-update-book-count-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 50%;
+    box-sizing: border-box;
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  
+  #admin-update-book-count-button:hover {
+    background-color: #044182;
+  }
+  
+  #admin-update-book-count-button {
+    background-color: #0c74e3; 
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 200px;
+    margin-right: 200px;
+    height: 50px;
+    width: 186px;
+    border-top-width: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    transition: background-color 0.3s ease;
+}
+  
+  @media only screen and (max-width: 600px) {
+    .admin-update-book-count-form {
+      width: 90%;
+    }
+  }
