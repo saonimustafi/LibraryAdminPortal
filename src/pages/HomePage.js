@@ -28,7 +28,7 @@ function HomePage() {
     async function checkLoggedIn() {
         const token = localStorage.getItem('token')
         if (token) {
-            const req = await fetch('http://127.0.0.1:3000/checkLoggedIn', {
+            const req = await fetch('http://127.0.0.1:3000/checkAdminLoggedIn', {
                 headers: {
                     'x-access-token': token,
                 },

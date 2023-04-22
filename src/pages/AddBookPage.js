@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import TopNav from '../components/TopNav'
 import './AddBookPage.css'
-import TopNav from '../components/TopNav'
 
 const AddBookPage = () => {
     const [image, setImage] = useState('')
@@ -40,7 +39,6 @@ const AddBookPage = () => {
   return (
     <>
     <div>
-    <TopNav />
         <div>
             <h2 className = 'admin-add-book-header'>Add Book</h2>
         </div>

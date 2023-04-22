@@ -29,7 +29,7 @@ function TopNav() {
     async function checkLoggedIn() {
         const token = localStorage.getItem('token')
         if (token) {
-            const req = await fetch('http://127.0.0.1:3000/checkLoggedIn', {
+            const req = await fetch('http://127.0.0.1:3000/checkAdminLoggedIn', {
                 headers: {
                     'x-access-token': token,
                 },
@@ -61,10 +61,11 @@ function TopNav() {
   
     return (
     <nav className="top-nav">
-      <Link to="/" className="logo-link">
+      <a href="/" className="logo-link">
         <img src={LOGO_IMG_URL} alt="Company logo" className="logo" />
-      </Link>
-      <Link to="/" className="company-name">Admin Portal</Link>
+      </a>      
+      <a href="/" className="company-name">Admin Portal</a>  
+      
       <ul className="menu">
         <li className="menu-item">
           <Link to="/categories" className="menu-link">Categories</Link>
@@ -83,8 +84,11 @@ function TopNav() {
           </button>
           {showDropdown && (
             <div className="user-dropdown-content">
-              <a href="#">Profile Settings</a>
-              <a href="#" onClick={handleLogout}>Log out</a>
+              {/* <a href="#">Profile Settings</a> */}
+              <Link to="/addBookAdmin">Add Book</Link>
+              <Link to="/deleteBookAdmin">Delete Book</Link>
+              <Link to="/updateBookCountAdmin">Update Book Count</Link>
+              <a href="/" onClick={handleLogout}>Log out</a>
               {/* <button onClick={handleLogout}>Log out</button> */}
             </div>
           )}
