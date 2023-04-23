@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import TopNav from "../components/TopNav";
 import './CheckUserFinePageAdmin.css'
 
 const Example = () => {
@@ -10,20 +11,22 @@ const Example = () => {
     const [userID, setUserID] = useState(null)
     const [errorMessage, setErrorMessage] = useState("");
 
+    
     const handleShowActivity = async (event) => {
         event.preventDefault();
 
         try {
             const userEmail = event.target.elements.fineUserEmail.value;
-            const userResponse = await fetch(`http://localhost:3004/users?email=${userEmail}`);
+            const userResponse = await fetch(`http://localhost:3000/users/searchemail/${userEmail}`);
             const userData = await userResponse.json();
 
-            if(userData && userData.length > 0) {
-                const user = (userData && userData.find(usr => usr.email === userEmail))? userData[0].id : ""
-                if (user !== "") {
+            if(userData) {
+                // const user = (userData && userData.find(usr => usr.email === userEmail))? userData[0].id : ""
+                const user = userData.id;
+                // if (user !== "") {
                     setUserID(user)
                     setShowTable(true);
-                }
+                // }
             }
             else {
                 setErrorMessage("User not available")
@@ -38,11 +41,13 @@ const Example = () => {
     useEffect(() => {
         async function fetchDetails() {
             try {
-            const activityListResponse = await fetch(`http://localhost:3004/userActivities?user_id=${userID}`)
+            const activityListResponse = await fetch(`http://localhost:3000/getfinedetails/${userID}`)
             const activityListData = await activityListResponse.json();
-            setUserActivityList(activityListData);
+            if(activityListResponse.status === 200) {
+                setUserActivityList(activityListData);
+            }
 
-            const bookResponse = await fetch("http://localhost:3004/books");
+            const bookResponse = await fetch("http://localhost:3000/books");
             const bookData = await bookResponse.json();
             setUserBooks(bookData);
             }
@@ -60,11 +65,28 @@ const Example = () => {
                 const combinedData = 
                 userActivityList.map((activityListItem) => ({
                     ...activityListItem,
-                    books: activityListItem.books.map((book) => ({
+                    books: activityListItem.booksBorrowed.map((book) => ({
                         ...book,
-                        bookImage: userBooks.find(b => b.title === book.bookName)?.image || ''}))
+                        bookImage: userBooks.find(b => b.id === book.book_id)?.image || '',
+                        bookName: userBooks.find(b => b.id === book.book_id)?.title || ''}))
                     }))
-                    const combinedDataModified = (combinedData) ? combinedData.filter(data => data.books.length !== 0) : null
+                    // const combinedDataModified = (combinedData) ? combinedData.filter(data => data.books.length !== 0) : null
+                    const combinedDataModified = combinedData.flatMap(activityListItem =>
+                                                    activityListItem.books
+                                                    .filter(book => !book.finePaid && book.fineToPay > 0)
+                                                    .map(book => ({
+                                                        ...book,
+                                                        fineToPay: parseFloat(book.fineToPay).toFixed(2)
+                                                    }))
+                                                    .map(book => ({
+                                                        ...book,
+                                                        userId: activityListItem.userId,
+                                                        checkOutDate: activityListItem.checkOutDate,
+                                                        returnDate: activityListItem.returnDate,
+                                                        actualReturnDate: activityListItem.actualReturnDate,
+                                                        finePaid: book.finePaid ? 'Yes' : 'No'
+                                                    }))
+                                                )
                     setCombinedDataFiltered(combinedDataModified)
             }
         }
@@ -75,6 +97,7 @@ const Example = () => {
 
     return(
         <>
+        <TopNav />
             <div>
                 <h2 className="fine-table-admin-header">User Fine</h2>
                 <form className = 'fine-table-admin-form' onSubmit={handleShowActivity}>
@@ -86,7 +109,7 @@ const Example = () => {
 
             <div>
                 {showTable ? (
-                <table className="fine-table">
+                <table className="fine-table-admin">
                     <thead>
                         <tr>
                             <th>Book Image</th>
@@ -94,40 +117,36 @@ const Example = () => {
                             <th>Check Out Date</th>
                             <th>Return Date</th>
                             <th>Actual Return Date</th>
+                            <th>Fine Paid</th>
                             <th colSpan="9">Fine</th>
                         </tr>
                         </thead>
                             <tbody>
                                 {
-                                combinedDataFiltered ? 
+                                !combinedDataFiltered ?  (<tr>
+                                    <td colSpan="7">Loading...</td>
+                                </tr>) : combinedDataFiltered.length > 0 ?
                                 ( combinedDataFiltered.map((activityListItem) => (
                                     activityListItem.books.map((book) => (
                                         <tr key = {book.id}>
                                             <td><img src = {book.bookImage} alt = {`${book.bookName} cover`}/></td>
                                             <td>{book.bookName}</td>
-                                            <td>{book.checkoutDate}</td>
+                                            <td>{book.checkOutDate}</td>
                                             <td>{book.returnDate}</td>
                                             <td>{book.actualReturnDate}</td>
+                                            <td>{book.finePaid ? "Yes" : "No"}</td>
                                             <td colSpan="8">{book.fineToPay}</td>
                                         </tr>
                                     ))
-                                ))) :
-                                (
-                                    (combinedDataFiltered && combinedDataFiltered.length === 0) ? (
+                                ))) : (
                                     <tr>
-                                        <td colSpan="8">No request exists for user</td>
+                                        <td colSpan="8">No fine exists for user</td>
                                     </tr>
-                                    ) : (
-                                    <tr>
-                                        <td colSpan="8">Loading...</td>
-                                    </tr>
-                                    )
-                                )
-                                }
+                                    )}
                                 {
-                                    combinedDataFiltered && (
+                                    combinedDataFiltered !== null && combinedDataFiltered.length !== 0 && (
                                         <tr>
-                                            <td id="fine-table-total-fine" colSpan="8">Total Fine</td>
+                                            <td id="fine-table-admin-total-fine" colSpan="8">Total Fine</td>
                                             <td>
                                                 {
                                                     combinedDataFiltered
@@ -142,7 +161,7 @@ const Example = () => {
                 </table>
                 )
                 : (
-                errorMessage && <div className="fine-table-error">{errorMessage}</div>
+                errorMessage && <div className="fine-table-admin-error">{errorMessage}</div>
                 )
                 }    
             </div>

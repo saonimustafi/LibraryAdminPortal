@@ -250,7 +250,7 @@ const UserActivitiesPageAdmin = () => {
 
     return (
         <> 
-        {/* <TopNav /> */}
+        <TopNav />
         <div>
             <h2 className = 'activity-table-admin-header'>Activity History</h2>
             <form className = 'activity-table-admin-form' onSubmit={handleShowActivity}>

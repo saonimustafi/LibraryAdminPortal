@@ -25,6 +25,7 @@ const DeleteBookPage = () => {
     }
   return (
     <div>
+        <TopNav />
         <div>
             <h2 className = 'admin-delete-book-header'>Delete Book</h2>
         </div>

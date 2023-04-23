@@ -1,7 +1,7 @@
 .fine-table-admin {
     border-collapse: collapse;
-    width: 100%;
     margin-top: 50px;
+    width: 100%;
   }
   
   .fine-table-admin th,
@@ -16,9 +16,9 @@
     font-weight: bold;
   }
   
-  .fine-table-admin td {
+ .fine-table-admin td {
     border-bottom: 1px solid #ddd;
-  }
+  } 
   
   .fine-table-admin td img {
     width: 80px;
@@ -73,7 +73,7 @@
     margin-bottom: 20px;
   }
 
-  .fine-table-error {
+  .fine-table-admin-error {
     padding-bottom: 15px;
     padding-top: 35px;
     text-align: center;
@@ -91,4 +91,11 @@
   
   #myButtonFine:hover {
     background-color: #3e8e41;
+  }
+
+  #fine-table-admin-total-fine {
+    padding: 8px;
+    text-align: left;
+    vertical-align: top;
+    font-weight: bold;
   }
