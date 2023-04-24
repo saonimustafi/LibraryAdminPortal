@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Book from '../components/Book';
 import TopNav from '../components/TopNav';
-// import { books } from '../data/books';
 import './HomePage.css';
 
 function HomePage() {
@@ -37,18 +36,6 @@ function HomePage() {
             if (data.status === 'ok') {
                 setIsLoggedIn(true)
                 setCurrentUser(data)
-                
-                // try {
-                //     const response = await fetch(`http://localhost:3000/requests/${data.id}`)
-                //     const responseData = await response.json()
-                //     const bookIDs = (responseData && responseData.books) ? responseData.books.map((request) => request.book_id) : [];                    
-                //     setRequestedBookIDs(bookIDs)
-                //     setIsFetchRequestedBooksCompleted(true)
-                // }
-                // catch(error) {
-                //     console.error(error);
-                // }
-                
             } else {
                 setIsLoggedIn(false)
                 setCurrentUser({})

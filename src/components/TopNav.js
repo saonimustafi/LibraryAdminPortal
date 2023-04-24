@@ -88,6 +88,8 @@ function TopNav() {
               <Link to="/addBookAdmin">Add Book</Link>
               <Link to="/deleteBookAdmin">Delete Book</Link>
               <Link to="/updateBookCountAdmin">Update Book Count</Link>
+              <Link to="/userActivitiesAdmin">Check User Activities</Link>
+              <Link to="/checkUserFineAdmin">Check User Fine</Link>
               <a href="/" onClick={handleLogout}>Log out</a>
               {/* <button onClick={handleLogout}>Log out</button> */}
             </div>

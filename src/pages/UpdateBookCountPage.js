@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './UpdateBookCountPage.css'
+import TopNav from '../components/TopNav'
 
 const UpdateBookCountPage = () => {
     const [title, setTitle] = useState('')
@@ -35,6 +36,7 @@ const UpdateBookCountPage = () => {
 
   return (
     <div>
+        <TopNav />
         <div>
             <h2 className = 'admin-update-book-count-header'>Update Book Count</h2>
         </div>

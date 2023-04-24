@@ -118,7 +118,12 @@ const UserActivitiesPageAdmin = () => {
             const newApprovalStatuses = {...approvalStatuses, [bookID]: ResponseData.approvalStatus}
             await setApprovalStatuses(newApprovalStatuses)
 
-            alert("Request Approved")
+            if(response.status === 200) {
+                alert("Request Approved")
+            }
+            else if (response.status === 400) {
+                alert("User has borrowed maximum books. Decline request.")
+            }
         }
         catch(error) {
             console.error(error)
@@ -250,7 +255,7 @@ const UserActivitiesPageAdmin = () => {
 
     return (
         <> 
-        {/* <TopNav /> */}
+        <TopNav />
         <div>
             <h2 className = 'activity-table-admin-header'>Activity History</h2>
             <form className = 'activity-table-admin-form' onSubmit={handleShowActivity}>
