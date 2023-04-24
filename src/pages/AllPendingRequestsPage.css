@@ -1,7 +1,8 @@
 .all-pending-requests-admin {
     border-collapse: collapse;
-    margin-top: 50px;
-    width: 100%;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .all-pending-requests-admin th,
@@ -44,42 +45,3 @@
     }
   }
   
-  
-  /* .fine-table-admin-label {
-    font-weight: bold;
-  } */
-
-  /* .fine-table-admin-input {
-    padding: 8px 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    margin-bottom: 20px;
-  } */
-
-  /* .fine-table-admin-error {
-    padding-bottom: 15px;
-    padding-top: 35px;
-    text-align: center;
-    font-size: 20px;
-  } */
-/*   
-  #myButtonFine {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-  }
-  
-  #myButtonFine:hover {
-    background-color: #3e8e41;
-  }
-
-  #fine-table-admin-total-fine {
-    padding: 8px;
-    text-align: left;
-    vertical-align: top;
-    font-weight: bold;
-  } */
