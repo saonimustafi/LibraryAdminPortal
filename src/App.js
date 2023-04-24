@@ -9,6 +9,7 @@ import CheckUserFinePageAdmin from './pages/CheckUserFinePageAdmin';
 import AddBookPage from './pages/AddBookPage';
 import DeleteBookPage from './pages/DeleteBookPage';
 import UpdateBookCountPage from './pages/UpdateBookCountPage';
+import AllPendingRequestsPage from './pages/AllPendingRequestsPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/addBookAdmin" element={<AddBookPage/>} />
           <Route path="/deleteBookAdmin" element={<DeleteBookPage />} />
           <Route path="/updateBookCountAdmin" element={<UpdateBookCountPage />} />
+          <Route path="/allPendingRequestsAdmin" element={<AllPendingRequestsPage />} />
         </Routes>
       </div>
     </Router>
