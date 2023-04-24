@@ -3,20 +3,27 @@ import './UpdateBookCountPage.css'
 import TopNav from '../components/TopNav'
 
 const UpdateBookCountPage = () => {
-    const [title, setTitle] = useState('')
+    const [name, setName] = useState('')
     const [count, setCount] = useState(0)
+    // const [allBooks, setAllBooks] = useState(null)
     // const [updateBookCountResponse, setUpdateBookCountResponse] = useState()
 
     const handleUpdateBook = async(event) => {
         event.preventDefault();
 
-        const response = await fetch(`http://localhost:3000/books/updatecount/${title}`, {
+        // const allBooksResponse = await fetch('http://localhost:3000/books')
+        // const allBooksData = await response.json()
+        // setAllBooks(allBooksData)
+
+        // const bookID = allBooks ? allBooks.map(book => book.title === title).id : 0;
+
+        const response = await fetch(`http://localhost:3000/books/updatecount`, {
             method: 'PUT',
             headers: {
                 'count': count,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title, count })
+            body: JSON.stringify({ name, count })
         });
 
         const responseData = await response.json()
@@ -33,7 +40,6 @@ const UpdateBookCountPage = () => {
         }
     }
 
-
   return (
     <div>
         <TopNav />
@@ -43,12 +49,12 @@ const UpdateBookCountPage = () => {
       <form className = 'admin-update-book-count-form' onSubmit = {handleUpdateBook}>
             <div className='admin-update-book-count-book-div'>
                 <label className = 'admin-update-book-count-label' htmlFor="title">Title:</label>
-                <input className = 'admin-update-book-count-input' type = "text" id={title} value={title} onChange={event=> setTitle(event.target.value)}/>
+                <input className = 'admin-update-book-count-input' type = "text" id={name} value={name} onChange={event=> setName(event.target.value)}/>
             </div>
 
             <div className='admin-update-book-count-book-div'>
                 <label className = 'admin-update-book-count-label' htmlFor="title">New Count:</label>
-                <input className = 'admin-update-book-count-input' type = "number" id={count} value={title} onChange={event=> setCount(event.target.value)}/>
+                <input className = 'admin-update-book-count-input' type = "number" id={count} value={count} onChange={event=> setCount(event.target.value)}/>
             </div>
 
             <button id='admin-update-book-count-button' type="submit">Update Book Count</button>

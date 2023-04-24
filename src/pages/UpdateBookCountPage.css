@@ -16,16 +16,7 @@
     max-width: 600px;
   }
 
-  /* .admin-delete-book-header {
-    padding-bottom: 15px;
-    padding-top: 15px;
-    text-align: center;
-    font-variant: all-small-caps;
-  } */
-  
-  /* .admin-add-book-div {
-    margin-bottom: 20px;
-  } */
+ 
   
   .admin-update-book-count-div {
     align-items: center;
@@ -36,15 +27,14 @@
   }
   
  .admin-update-book-count-label {
-    /* padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    width: 100%;
-    box-sizing: border-box; */
-    text-align: center;
+  
     font-weight: bold;
-    margin-bottom: 5px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .admin-update-book-count-input {
