@@ -82,8 +82,8 @@ const UserActivitiesPageAdmin = () => {
                     .map((book) => ({
                         ...book,
 
-                        bookImage: (book && userBooks.find(b => b.title === book.title)) ? 
-                        userBooks.find(b => b.title === book.title).image : '',
+                        bookImage: (book && userBooks[0].find(b => b.title === book.title)) ? 
+                        userBooks[0].find(b => b.title === book.title).image : '',
                         
                         bookReturnDate: (book && returnDateData?.[0]?.books.find(b => b.book_id === book.book_id)?.returnDate) ?? '',
 
@@ -200,7 +200,12 @@ const UserActivitiesPageAdmin = () => {
             const newReturnDates = {...currentReturnDates, [bookID]: ResponseData.returnDate}
             setCurrentReturnDates(newReturnDates)
 
-            alert("Book checked out")
+            if(responseCheckOutDate.status === 200) {
+                alert("Book checked out")
+            }
+            else {
+                alert("Something is wrong!")
+            }
         }
         catch(error) {
             console.error(error)
@@ -224,7 +229,9 @@ const UserActivitiesPageAdmin = () => {
             const newActualReturnDates = {...actualReturnDates, [bookID]: ResponseData.actualReturnDate}
             setActualReturnDates(newActualReturnDates)
 
-            alert("Book returned")
+            if(responseActualReturnDate.status === 200) {
+                alert("Book returned")
+            }
         }
         catch(error) {
             console.error(error)
@@ -245,8 +252,14 @@ const UserActivitiesPageAdmin = () => {
             const newReturnDates = {...currentReturnDates, [bookID]: ResponseData.newReturnDate}
             setCurrentReturnDates(newReturnDates)
 
-            alert("Book renewed")
+            if(responseRenewDate.status === 200) {
+                alert("Book renewed")
             }
+
+            else if (responseRenewDate.status === 400) {
+                alert("Please return the book and pay the fine. Then you can raise a request to borrow the book")
+            }
+        }
 
         catch(error) {
             console.error(error)
