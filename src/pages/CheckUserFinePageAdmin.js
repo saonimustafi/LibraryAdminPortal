@@ -66,27 +66,23 @@ const Example = () => {
                 userActivityList.map((activityListItem) => ({
                     ...activityListItem,
                     books: activityListItem.booksBorrowed.map((book) => ({
-                        ...book,
+                        // ...book,
                         bookImage: userBooks.find(b => b.id === book.book_id)?.image || '',
-                        bookName: userBooks.find(b => b.id === book.book_id)?.title || ''}))
-                    }))
+                        bookName: userBooks.find(b => b.id === book.book_id)?.title || ''})
+                        )
+                    })
+                    )
                     // const combinedDataModified = (combinedData) ? combinedData.filter(data => data.books.length !== 0) : null
-                    const combinedDataModified = combinedData.flatMap(activityListItem =>
-                                                    activityListItem.books
-                                                    .filter(book => !book.finePaid && book.fineToPay > 0)
-                                                    .map(book => ({
-                                                        ...book,
-                                                        fineToPay: parseFloat(book.fineToPay).toFixed(2)
-                                                    }))
-                                                    .map(book => ({
-                                                        ...book,
-                                                        userId: activityListItem.userId,
-                                                        checkOutDate: activityListItem.checkOutDate,
-                                                        returnDate: activityListItem.returnDate,
-                                                        actualReturnDate: activityListItem.actualReturnDate,
-                                                        finePaid: book.finePaid ? 'Yes' : 'No'
-                                                    }))
-                                                )
+                    const combinedDataModified = 
+                        combinedData.flatMap(activityListItem =>activityListItem.booksBorrowed
+                            .filter(book => !book.finePaid && book.fineToPay > 0)
+                            .map(book => ({
+                            ...book,
+                            userId: activityListItem.user_id,
+                            bookImage: userBooks.find(b => b.id === book.book_id)?.image || '',
+                            bookName: userBooks.find(b => b.id === book.book_id)?.title || ''})
+                            )
+                        )
                     setCombinedDataFiltered(combinedDataModified)
             }
         }
@@ -126,19 +122,18 @@ const Example = () => {
                                 !combinedDataFiltered ?  (<tr>
                                     <td colSpan="7">Loading...</td>
                                 </tr>) : combinedDataFiltered.length > 0 ?
-                                ( combinedDataFiltered.map((activityListItem) => (
-                                    activityListItem.books.map((book) => (
-                                        <tr key = {book.id}>
-                                            <td><img src = {book.bookImage} alt = {`${book.bookName} cover`}/></td>
-                                            <td>{book.bookName}</td>
-                                            <td>{book.checkOutDate}</td>
-                                            <td>{book.returnDate}</td>
-                                            <td>{book.actualReturnDate}</td>
-                                            <td>{book.finePaid ? "Yes" : "No"}</td>
-                                            <td colSpan="8">{book.fineToPay}</td>
+                                ( combinedDataFiltered.length > 0 && combinedDataFiltered.map((activityListItem) => (
+                                        <tr key = {activityListItem.book_id}>
+                                            <td><img src = {activityListItem.bookImage} alt = {`${activityListItem.bookName} cover`}/></td>
+                                            <td>{activityListItem.bookName}</td>
+                                            <td>{activityListItem.checkOutDate}</td>
+                                            <td>{new Date(activityListItem.returnDate).toLocaleString()}</td>
+                                            <td>{activityListItem.actualReturnDate}</td>
+                                            <td>{activityListItem.finePaid ? "Yes" : "No"}</td>
+                                            <td colSpan="8">{activityListItem.fineToPay}</td>
                                         </tr>
-                                    ))
-                                ))) : (
+                                    )
+                                )) : (
                                     <tr>
                                         <td colSpan="8">No fine exists for user</td>
                                     </tr>
@@ -149,9 +144,10 @@ const Example = () => {
                                             <td id="fine-table-admin-total-fine" colSpan="8">Total Fine</td>
                                             <td>
                                                 {
-                                                    combinedDataFiltered
-                                                    .flatMap((activityItem) => activityItem.books)
-                                                    .reduce((totalFine, book) => totalFine + (book.fineToPay || 0),0)
+                                                    // combinedDataFiltered
+                                                    // .flatMap((activityItem) => activityItem.books)
+                                                    // .reduce((totalFine, book) => totalFine + (book.fineToPay || 0),0)
+                                                    combinedDataFiltered.reduce((totalfine, activityItem) => totalfine + (activityItem.fineToPay || 0),0)
                                                 }
                                             </td>
                                         </tr>
