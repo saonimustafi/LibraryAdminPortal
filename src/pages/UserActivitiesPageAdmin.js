@@ -368,5 +368,4 @@ const UserActivitiesPageAdmin = () => {
     );
 }
 
-
 export default UserActivitiesPageAdmin;
