@@ -136,7 +136,7 @@ const AllPendingRequestsPage = () => {
                                 <td rowSpan={pendingItem.books.length}>{pendingItem.books[0].userEmail}</td>
                                 <td><img src = {pendingItem.books[0].bookImage} alt = {`${pendingItem.books[0].title} cover`}/></td>
                                 <td>{pendingItem.books[0].title}</td>
-                                <td>{pendingItem.books[0].requestDate}</td>
+                                <td>{new Date(pendingItem.books[0].requestDate).toLocaleDateString()}</td>
                                 <td>{pendingItem.books[0].approvalStatus}</td>
                                 
                             </tr>
@@ -145,7 +145,7 @@ const AllPendingRequestsPage = () => {
                                             <tr key = {`${pendingItem.user_id} - ${book.id}`}>
                                                 <td><img src = {book.bookImage} alt = {`${book.bookImage} cover`}/></td>
                                                 <td>{book.title}</td>
-                                                <td>{book.requestDate}</td>
+                                                <td>{new Date(book.requestDate).toLocaleDateString()}</td>
                                                 <td>{book.approvalStatus}</td>
                                             </tr>
                                         ))}

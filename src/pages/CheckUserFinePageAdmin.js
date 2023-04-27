@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TopNav from "../components/TopNav";
 import './CheckUserFinePageAdmin.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const Example = () => {
 
@@ -124,12 +126,21 @@ const Example = () => {
                                 </tr>) : combinedDataFiltered.length > 0 ?
                                 ( combinedDataFiltered.length > 0 && combinedDataFiltered.map((activityListItem) => (
                                         <tr key = {activityListItem.book_id}>
+
                                             <td><img src = {activityListItem.bookImage} alt = {`${activityListItem.bookName} cover`}/></td>
+                                            
                                             <td>{activityListItem.bookName}</td>
-                                            <td>{activityListItem.checkOutDate}</td>
-                                            <td>{new Date(activityListItem.returnDate).toLocaleString()}</td>
-                                            <td>{activityListItem.actualReturnDate}</td>
-                                            <td>{activityListItem.finePaid ? "Yes" : "No"}</td>
+                                            
+                                            <td>{new Date(activityListItem.checkOutDate).toLocaleDateString()}</td>
+                                            
+                                            <td>{new Date(activityListItem.returnDate).toLocaleDateString()}</td>
+                                            
+                                            <td>{(activityListItem.actualReturnDate) ? new Date(activityListItem.actualReturnDate).toLocaleDateString() : '-'}</td>
+                                            
+                                            {/* <td>{activityListItem.finePaid ? "Yes" : "No"}</td> */}
+                                            
+                                            <td className="green-check-red-cross">{activityListItem.finePaid ? <FontAwesomeIcon icon={faCheck} className="fa-check-admin"/> : <FontAwesomeIcon icon={faTimes} />}</td>
+                                            
                                             <td colSpan="8">{activityListItem.fineToPay}</td>
                                         </tr>
                                     )
