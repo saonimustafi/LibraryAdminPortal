@@ -1,7 +1,9 @@
 .fine-table-admin {
     border-collapse: collapse;
     margin-top: 50px;
-    width: 100%;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .fine-table-admin th,
