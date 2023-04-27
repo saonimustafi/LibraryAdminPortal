@@ -1,5 +1,4 @@
 import React, { useEffect, useState }  from 'react'
-// import { books } from '../data/books'
 import './UserActivitiesPageAdmin.css';
 import TopNav from '../components/TopNav';
 
@@ -129,29 +128,6 @@ const UserActivitiesPageAdmin = () => {
             console.error(error)
         }
     }
-
-    // useEffect(() => {
-    //     const updateApprovalStatuses = async(bookID) => {
-    //       try {
-    //         const response = await fetch(`http://localhost:3000/checkoutdetails/${userID}`, {
-    //           method: 'GET',
-    //           headers: {
-    //             'Content-Type': 'application/json'
-    //           }
-    //         });
-      
-    //         const responseData = await response.json();
-    //         const newApprovalStatuses = {...approvalStatuses, [bookID]: responseData.approvalStatus};
-    //         setApprovalStatuses(newApprovalStatuses);
-    //       } catch(error) {
-    //         console.error(error);
-    //       }
-    //     };
-      
-    //     // for (bookID in approvalRejectionDates) {
-    //     //   updateApprovalStatuses(bookID);
-    //     // approvalRejectionDates,}
-    // }, [ userID, approvalStatuses]);
 
 
     const handleReject = async(bookID) => {
