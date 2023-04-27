@@ -106,33 +106,6 @@
     cursor: pointer;
   }
   
-
-/* wed */
-
-/* .user-dropdown-container {
-    position: relative;
-  }
-   */
-  /* .user-dropdown-content {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    z-index: 1;
-    background-color: white;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-  } */
-  
-  /* .user-dropdown-content a {
-    text-decoration: none;
-    color: black;
-    margin: 5px 0;
-  } */
-  
-
-
   .user-dropdown-container {
     position: relative;
   }
@@ -166,6 +139,7 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
+    font-size: 15px;
   }
   
   .user-dropdown-content a {
