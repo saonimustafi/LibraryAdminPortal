@@ -1,5 +1,4 @@
 import React, { useEffect, useState }  from 'react'
-// import { books } from '../data/books'
 import './UserActivitiesPageAdmin.css';
 import TopNav from '../components/TopNav';
 
@@ -129,29 +128,6 @@ const UserActivitiesPageAdmin = () => {
             console.error(error)
         }
     }
-
-    // useEffect(() => {
-    //     const updateApprovalStatuses = async(bookID) => {
-    //       try {
-    //         const response = await fetch(`http://localhost:3000/checkoutdetails/${userID}`, {
-    //           method: 'GET',
-    //           headers: {
-    //             'Content-Type': 'application/json'
-    //           }
-    //         });
-      
-    //         const responseData = await response.json();
-    //         const newApprovalStatuses = {...approvalStatuses, [bookID]: responseData.approvalStatus};
-    //         setApprovalStatuses(newApprovalStatuses);
-    //       } catch(error) {
-    //         console.error(error);
-    //       }
-    //     };
-      
-    //     // for (bookID in approvalRejectionDates) {
-    //     //   updateApprovalStatuses(bookID);
-    //     // approvalRejectionDates,}
-    // }, [ userID, approvalStatuses]);
 
 
     const handleReject = async(bookID) => {
@@ -306,22 +282,23 @@ const UserActivitiesPageAdmin = () => {
 
                                     <td>{book.title}</td> 
 
-                                    <td>{book.requestDate}</td>
+                                    <td>{new Date(book.requestDate).toLocaleDateString()}</td>
 
-                                    <td>{(book.approvedOrRejectedDate) ? book.approvedOrRejectedDate : (approvalRejectionDates[book.book_id] ? new Date(approvalRejectionDates[book.book_id]).toISOString() : "-")}</td>
+                                    <td>{(book.approvedOrRejectedDate) ? new Date(book.approvedOrRejectedDate).toLocaleDateString() : (approvalRejectionDates[book.book_id] ? new Date(approvalRejectionDates[book.book_id]).toLocaleDateString() : "-")}</td>
 
                                     <td>{approvalStatuses[book.book_id] ? approvalStatuses[book.book_id] : ((book.approvalStatus)? book.approvalStatus : "-")}</td>
 
-                                    <td>{(book.checkOutDate)? book.checkOutDate : (checkoutDates[book.book_id] ? new Date(checkoutDates[book.book_id]).toISOString() : "-")}</td>
+                                    <td>{(book.checkOutDate)? new Date(book.checkOutDate).toLocaleDateString() : (checkoutDates[book.book_id] ? new Date(checkoutDates[book.book_id]).toLocaleDateString() : "-")}</td>
 
-                                    <td>{currentReturnDates[book.book_id] ? new Date(currentReturnDates[book.book_id]).toISOString() : (book.bookReturnDate? book.bookReturnDate : "-")}</td>
+                                    <td>{currentReturnDates[book.book_id] ? new Date(currentReturnDates[book.book_id]).toLocaleDateString() : (book.bookReturnDate? new Date(book.bookReturnDate).toLocaleDateString() : "-")}</td>
 
-                                    <td>{(book.bookActualReturnDate)? book.bookActualReturnDate : (actualReturnDates[book.book_id] ? new Date(actualReturnDates[book.book_id]).toISOString() : "-")}</td>
+                                    <td>{(book.bookActualReturnDate)? new Date(book.bookActualReturnDate).toLocaleDateString() : (actualReturnDates[book.book_id] ? new Date(actualReturnDates[book.book_id]).toLocaleDateString() : "-")}</td>
 
                                     <td>{
                                        book.approvalStatus === 'Pending' ? (
                                         <>
                                             <button id="approveButton" onClick={() => handleApprove(book.book_id)}>Approve</button>
+                                            
                                             <button id="rejectButton" onClick={() => handleReject(book.book_id)}>Decline</button>
                                         </>
                                         ) : 
@@ -333,6 +310,7 @@ const UserActivitiesPageAdmin = () => {
                                         : book.checkOutDate && !book.bookActualReturnDate ? (
                                             <td>
                                                 <button id="returnButton" onClick={() => handleReturn(book.book_id)}>Return</button>
+                                                
                                                 <button id="renewButton" onClick={() => handleRenew(book.book_id)}>Renew</button>
                                             </td>
                                             ) : 
@@ -367,6 +345,5 @@ const UserActivitiesPageAdmin = () => {
         </>
     );
 }
-
 
 export default UserActivitiesPageAdmin;

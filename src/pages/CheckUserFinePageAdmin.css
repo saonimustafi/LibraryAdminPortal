@@ -1,14 +1,19 @@
 .fine-table-admin {
     border-collapse: collapse;
     margin-top: 50px;
-    width: 100%;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .fine-table-admin th,
   .fine-table-admin td {
-    padding: 8px;
+    /* padding: 8px;
     text-align: left;
-    vertical-align: top;
+    vertical-align: top; */
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 8px;
   }
   
   .fine-table-admin th {
@@ -98,4 +103,12 @@
     text-align: left;
     vertical-align: top;
     font-weight: bold;
+  }
+
+  .green-check-red-cross {
+    color: red;
+  }
+  
+  .green-check-red-cross .fa-check-admin {
+    color: green;
   }

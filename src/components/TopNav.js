@@ -3,11 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import './TopNav.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-// import jwt from 'jsonwebtoken'
 
 function TopNav() {    
     const [isLoggedIn, setIsLoggedIn] = useState([]);
-    // const [userEmail, setUserEmail] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate()
@@ -37,20 +35,16 @@ function TopNav() {
             const data = await req.json()
             if (data.status === 'ok') {
                 setIsLoggedIn(true)
-                // setUserEmail(data.email)
                 setCurrentUser(data)
             } else {
                 setIsLoggedIn(false)
-                // setUserEmail('')
                 setCurrentUser({})
                 console.log('Error occurred during user authentication: ' + data.error)
                 navigate('/')
             }
 		} else {
             setIsLoggedIn(false)
-            // setUserEmail('')
             setCurrentUser({})
-            // console.log('Error occurred during user authentication: ' + data.error)
             navigate('/')
         }
 	}
@@ -76,22 +70,21 @@ function TopNav() {
       </ul>
 
       {isLoggedIn ? (
-        // <p>Hello, {userEmail}!</p>
-
           <div className="user-dropdown-container">
-          <button className="user-dropdown-button" onClick={handleDropdown}>
-            <p>Hello, {currentUser.email}!</p>
-          </button>
+          <Link to="#" className="user-dropdown-link" onClick={handleDropdown}>
+            {currentUser.email && (
+              <p className="user-dropdown-hello">Hello, {currentUser.email.split('@').shift()}!</p>
+            )}
+          </Link>
           {showDropdown && (
             <div className="user-dropdown-content">
-              {/* <a href="#">Profile Settings</a> */}
               <Link to="/addBookAdmin">Add Book</Link>
               <Link to="/deleteBookAdmin">Delete Book</Link>
               <Link to="/updateBookCountAdmin">Update Book Count</Link>
-              <Link to="/userActivitiesAdmin">Check User Activities</Link>
-              <Link to="/checkUserFineAdmin">Check User Fine</Link>
+              <Link to="/allPendingRequestsAdmin">All Pending Requests</Link>
+              <Link to="/userActivitiesAdmin">User Activities</Link>
+              <Link to="/checkUserFineAdmin">User Fine</Link>
               <a href="/" onClick={handleLogout}>Log out</a>
-              {/* <button onClick={handleLogout}>Log out</button> */}
             </div>
           )}
         </div>
