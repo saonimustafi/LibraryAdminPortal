@@ -9,8 +9,8 @@
   .activity-table-admin th,
   .activity-table-admin td {
     padding: 8px;
-    text-align: left;
-    vertical-align: top;
+    text-align: center;
+    vertical-align:top;
   }
   
   .activity-table-admin th {
@@ -21,6 +21,7 @@
   
   .activity-table-admin td {
     border-bottom: 1px solid #ddd;
+    text-align: center;
   }
   
   .activity-table-admin td img {

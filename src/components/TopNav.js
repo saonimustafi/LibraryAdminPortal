@@ -73,7 +73,7 @@ function TopNav() {
           <div className="user-dropdown-container">
           <Link to="#" className="user-dropdown-link" onClick={handleDropdown}>
             {currentUser.email && (
-              <p className="user-dropdown-hello">Hello, {currentUser.email.split('@').shift()}!</p>
+              <p className="user-dropdown-hello">Hello, {currentUser.email.split('@').shift()}</p>
             )}
           </Link>
           {showDropdown && (

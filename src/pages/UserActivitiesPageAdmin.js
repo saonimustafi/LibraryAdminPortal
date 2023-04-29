@@ -17,6 +17,13 @@ const UserActivitiesPageAdmin = () => {
     const [actualReturnDates, setActualReturnDates] = useState({})
     const [approvalStatuses, setApprovalStatuses] = useState({})
 
+    const [showApprovedStatus, setShowApprovedStatus] = useState(true);
+    const [showRejectedStatus, setShowRejectedStatus] = useState(true);
+    const [showCheckoutStatus, setShowCheckoutStatus] = useState(false);
+    const [showRenewStatus, setShowRenewStatus] = useState(false);
+    const [showReturnStatus, setShowReturnStatus] = useState(false);
+
+
    
     const handleShowActivity = async (event) => {
         event.preventDefault();
@@ -123,6 +130,10 @@ const UserActivitiesPageAdmin = () => {
             else if (response.status === 400) {
                 alert("User has borrowed maximum books. Decline request.")
             }
+
+            setShowApprovedStatus(false);
+            setShowRejectedStatus(false);
+            setShowCheckoutStatus(true);
         }
         catch(error) {
             console.error(error)
@@ -149,6 +160,9 @@ const UserActivitiesPageAdmin = () => {
             setApprovalStatuses(newApprovalStatuses)
 
             alert("Request Declined")
+
+            setShowApprovedStatus(false);
+            setShowRejectedStatus(false);
         }
         catch(error) {
             console.error(error)
@@ -182,6 +196,10 @@ const UserActivitiesPageAdmin = () => {
             else {
                 alert("Something is wrong!")
             }
+
+            setShowCheckoutStatus(false);
+            setShowRenewStatus(true);
+            setShowReturnStatus(true);
         }
         catch(error) {
             console.error(error)
@@ -198,7 +216,6 @@ const UserActivitiesPageAdmin = () => {
                     'Content-Type': 'application/json'
                 }
             })
-
 
             const ResponseData = await responseActualReturnDate.json()
             
@@ -302,19 +319,19 @@ const UserActivitiesPageAdmin = () => {
                                             <button id="rejectButton" onClick={() => handleReject(book.book_id)}>Decline</button>
                                         </>
                                         ) : 
-                                            book.approvalStatus === 'Approved' && book.checkOutDate === null ? (
+                                            (book.approvalStatus === 'Approved' && book.checkOutDate === null) || showCheckoutStatus? (
                                                 <td>
                                                     <button id="checkoutButton" onClick={() => handleCheckOut(book.book_id)}>Checkout</button>
                                                 </td>
                                             )    
-                                        : book.checkOutDate && !book.bookActualReturnDate ? (
+                                        : (book.checkOutDate && !book.bookActualReturnDate) || (showRenewStatus || showReturnStatus) ? (
                                             <td>
                                                 <button id="returnButton" onClick={() => handleReturn(book.book_id)}>Return</button>
                                                 
                                                 <button id="renewButton" onClick={() => handleRenew(book.book_id)}>Renew</button>
                                             </td>
-                                            ) : 
-                                        (
+                                            ) :
+                                            (
                                             <td></td>
                                             )
                                     }
