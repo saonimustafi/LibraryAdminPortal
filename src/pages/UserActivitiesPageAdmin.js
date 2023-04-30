@@ -17,6 +17,11 @@ const UserActivitiesPageAdmin = () => {
     const [actualReturnDates, setActualReturnDates] = useState({})
     const [approvalStatuses, setApprovalStatuses] = useState({})
 
+    // const [showApprovalButton, setShowApprovalButton] = useState(true)
+    // const [showRejectButton, setShowRejectButton] = useState(true)
+    // const [showCheckOutButton, setShowCheckoutButton] = useState(false)
+    // const [showReturnButton, setShowReturnButton] = useState(false)
+    // const [showRenewButton, setShowRenewButton] = useState(false)
    
     const handleShowActivity = async (event) => {
         event.preventDefault();
