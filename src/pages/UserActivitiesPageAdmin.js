@@ -1,6 +1,7 @@
 import React, { useEffect, useState }  from 'react'
 import './UserActivitiesPageAdmin.css';
 import TopNav from '../components/TopNav';
+import SuccessBanner from '../components/SuccessBanner';
 
 
 const UserActivitiesPageAdmin = () => {
@@ -16,6 +17,8 @@ const UserActivitiesPageAdmin = () => {
     const [approvalRejectionDates, setApprovalRejectionDates] = useState({});
     const [actualReturnDates, setActualReturnDates] = useState({})
     const [approvalStatuses, setApprovalStatuses] = useState({})
+
+    const [showApproveSuccessBanner, setShowApproveSuccessBanner] = useState(false)
    
     const handleShowActivity = async (event) => {
         event.preventDefault();
@@ -115,7 +118,7 @@ const UserActivitiesPageAdmin = () => {
             await setApprovalStatuses(newApprovalStatuses)
 
             if(response.status === 200) {
-                alert("Request Approved")
+                // alert("Request Approved")                
                 const newData = combinedDataFiltered.map((activityItem) => {
                     const newBooks = activityItem.books.map((book) => {
                         if (book.book_id === bookID) {
@@ -126,6 +129,8 @@ const UserActivitiesPageAdmin = () => {
                     return {...activityItem, books: newBooks}
                 })
                 setCombinedDataFiltered(newData)
+                setShowApproveSuccessBanner(true)
+                // return <SuccessBanner message="Request Approved" />;
             }
             else if (response.status === 400) {
                 alert("User has borrowed maximum books. Decline request.")
@@ -297,6 +302,7 @@ const UserActivitiesPageAdmin = () => {
     return (
         <> 
         <TopNav />
+        {showApproveSuccessBanner && <SuccessBanner message="Request Approved" />}
         <div>
             <h2 className = 'activity-table-admin-header'>Activity History</h2>
             <form className = 'activity-table-admin-form' onSubmit={handleShowActivity}>
