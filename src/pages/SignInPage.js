@@ -56,10 +56,10 @@ function LoginUser() {
         />
         <button type="submit" className="sign-in-button">Sign In</button>
       </form>
-      <div className="sign-in-links">
+      {/* <div className="sign-in-links">
         <Link to="/forgot-password" className="sign-in-link">Forgot Password?</Link>
         <Link to="/register" className="sign-in-link">New user? Register</Link>
-      </div>
+      </div> */}
     </div>
   );
 }

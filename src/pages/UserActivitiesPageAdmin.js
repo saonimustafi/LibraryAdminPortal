@@ -242,7 +242,7 @@ const UserActivitiesPageAdmin = () => {
                 const newData = combinedDataFiltered.map((activityItem) => {
                     const newBooks = activityItem.books.map((book) => {
                         if (book.book_id === bookID) {
-                            return {...book, bookActualReturnDate: ResponseData.bookActualReturnDate}
+                            return {...book, bookActualReturnDate: ResponseData.actualReturnDate}
                         }
                         return book
                     })
@@ -318,8 +318,8 @@ const UserActivitiesPageAdmin = () => {
                     <th>Approval/Rejection Date</th>
                     <th>Approval Status</th>
                     <th>CheckOut Date</th>
+                    <th>Due Date</th>
                     <th>Return Date</th>
-                    <th>Actual Return Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>

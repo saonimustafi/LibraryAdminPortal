@@ -60,14 +60,14 @@ function TopNav() {
       </a>      
       <a href="/" className="company-name">Admin Portal</a>  
       
-      <ul className="menu">
+      {/* <ul className="menu">
         <li className="menu-item">
           <Link to="/categories" className="menu-link">Categories</Link>
         </li>
         <li className="menu-item">
           <Link to="/contact-us" className="menu-link">Contact us</Link>
         </li>
-      </ul>
+      </ul> */}
 
       {isLoggedIn ? (
           <div className="user-dropdown-container">

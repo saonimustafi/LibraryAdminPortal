@@ -113,8 +113,8 @@ const Example = () => {
                             <th>Book Image</th>
                             <th>Book Name</th>
                             <th>Check Out Date</th>
+                            <th>Due Date</th>
                             <th>Return Date</th>
-                            <th>Actual Return Date</th>
                             <th>Fine Paid</th>
                             <th colSpan="9">Fine</th>
                         </tr>
