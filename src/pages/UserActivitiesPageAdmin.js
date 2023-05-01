@@ -16,7 +16,6 @@ const UserActivitiesPageAdmin = () => {
     const [approvalRejectionDates, setApprovalRejectionDates] = useState({});
     const [actualReturnDates, setActualReturnDates] = useState({})
     const [approvalStatuses, setApprovalStatuses] = useState({})
-
    
     const handleShowActivity = async (event) => {
         event.preventDefault();
@@ -97,8 +96,6 @@ const UserActivitiesPageAdmin = () => {
         generateCombinedData()
     },[activity, userBooks, returnDateData]);
 
-
-
     const handleApprove = async(bookID) => {
         try {
             const response = await fetch(`http://localhost:3000/requests/approveindividualrequest/${userID}/${bookID}`,
@@ -119,6 +116,16 @@ const UserActivitiesPageAdmin = () => {
 
             if(response.status === 200) {
                 alert("Request Approved")
+                const newData = combinedDataFiltered.map((activityItem) => {
+                    const newBooks = activityItem.books.map((book) => {
+                        if (book.book_id === bookID) {
+                            return {...book, approvalStatus: ResponseData.approvalStatus}
+                        }
+                        return book
+                    })
+                    return {...activityItem, books: newBooks}
+                })
+                setCombinedDataFiltered(newData)
             }
             else if (response.status === 400) {
                 alert("User has borrowed maximum books. Decline request.")
@@ -128,7 +135,6 @@ const UserActivitiesPageAdmin = () => {
             console.error(error)
         }
     }
-
 
     const handleReject = async(bookID) => {
         try {
@@ -142,20 +148,37 @@ const UserActivitiesPageAdmin = () => {
 
             const ResponseData = await response.json()
             const newRejectDates = {...approvalRejectionDates, [bookID]: ResponseData.rejectDate}
-            setApprovalRejectionDates(newRejectDates)
-            
+            await setApprovalRejectionDates(newRejectDates)            
 
             const newApprovalStatuses = {...approvalStatuses, [bookID]: ResponseData.approvalStatus}
-            setApprovalStatuses(newApprovalStatuses)
+            await setApprovalStatuses(newApprovalStatuses)
 
-            alert("Request Declined")
+            if(response.status == 200) {
+                alert("Request Declined")
+                const newData = combinedDataFiltered.map((activityItem) => {
+                    const newBooks = activityItem.books.map((book) => {
+                        if (book.book_id === bookID) {
+                            return {...book, approvalStatus: ResponseData.approvalStatus}
+                        }
+                        return book
+                    })
+                    return {...activityItem, books: newBooks}
+                })
+                setCombinedDataFiltered(newData)                
+            }
+
+            else if (response.status == 404) {
+                alert("Book request does not exist for the user")
+            }
+
+            else {
+                alert("Something is wrong")
+            }
         }
         catch(error) {
             console.error(error)
         }
     }
-
-
 
     const handleCheckOut = async(bookID) => {
         try {
@@ -167,17 +190,26 @@ const UserActivitiesPageAdmin = () => {
                 }
             })
 
-
             const ResponseData = await responseCheckOutDate.json()
             
             const newCheckoutDates = {...checkoutDates, [bookID]: ResponseData.checkOutDate}
             setCheckoutDates(newCheckoutDates)
 
             const newReturnDates = {...currentReturnDates, [bookID]: ResponseData.returnDate}
-            setCurrentReturnDates(newReturnDates)
+            setCurrentReturnDates(newReturnDates)            
 
             if(responseCheckOutDate.status === 200) {
                 alert("Book checked out")
+                const newData = combinedDataFiltered.map((activityItem) => {
+                    const newBooks = activityItem.books.map((book) => {
+                        if (book.book_id === bookID) {
+                            return {...book, checkOutDate: ResponseData.checkOutDate}
+                        }
+                        return book
+                    })
+                    return {...activityItem, books: newBooks}
+                })
+                setCombinedDataFiltered(newData)
             }
             else {
                 alert("Something is wrong!")
@@ -207,6 +239,16 @@ const UserActivitiesPageAdmin = () => {
 
             if(responseActualReturnDate.status === 200) {
                 alert("Book returned")
+                const newData = combinedDataFiltered.map((activityItem) => {
+                    const newBooks = activityItem.books.map((book) => {
+                        if (book.book_id === bookID) {
+                            return {...book, bookActualReturnDate: ResponseData.actualReturnDate}
+                        }
+                        return book
+                    })
+                    return {...activityItem, books: newBooks}
+                })
+                setCombinedDataFiltered(newData)
             }
         }
         catch(error) {
@@ -230,6 +272,16 @@ const UserActivitiesPageAdmin = () => {
 
             if(responseRenewDate.status === 200) {
                 alert("Book renewed")
+                const newData = combinedDataFiltered.map((activityItem) => {
+                    const newBooks = activityItem.books.map((book) => {
+                        if (book.book_id === bookID) {
+                            return {...book, bookReturnDate: ResponseData.bookReturnDate}
+                        }
+                        return book
+                    })
+                    return {...activityItem, books: newBooks}
+                })
+                setCombinedDataFiltered(newData)
             }
 
             else if (responseRenewDate.status === 400) {
@@ -266,8 +318,8 @@ const UserActivitiesPageAdmin = () => {
                     <th>Approval/Rejection Date</th>
                     <th>Approval Status</th>
                     <th>CheckOut Date</th>
+                    <th>Due Date</th>
                     <th>Return Date</th>
-                    <th>Actual Return Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>

@@ -113,8 +113,8 @@ const Example = () => {
                             <th>Book Image</th>
                             <th>Book Name</th>
                             <th>Check Out Date</th>
+                            <th>Due Date</th>
                             <th>Return Date</th>
-                            <th>Actual Return Date</th>
                             <th>Fine Paid</th>
                             <th colSpan="9">Fine</th>
                         </tr>
@@ -152,13 +152,16 @@ const Example = () => {
                                 {
                                     combinedDataFiltered !== null && combinedDataFiltered.length !== 0 && (
                                         <tr>
-                                            <td id="fine-table-admin-total-fine" colSpan="8">Total Fine</td>
+                                            <td id="fine-table-admin-total-fine" colSpan="8">Total Fine Due</td>
                                             <td>
                                                 {
-                                                    // combinedDataFiltered
-                                                    // .flatMap((activityItem) => activityItem.books)
-                                                    // .reduce((totalFine, book) => totalFine + (book.fineToPay || 0),0)
-                                                    combinedDataFiltered.reduce((totalfine, activityItem) => totalfine + (activityItem.fineToPay || 0),0)
+                                                    combinedDataFiltered.reduce((totalfine, activityItem) => {
+                                                        if (activityItem.finePaid === false) {
+                                                            return totalfine + (activityItem.fineToPay || 0);
+                                                        } else {
+                                                            return totalfine;
+                                                        }
+                                                    }, 0)
                                                 }
                                             </td>
                                         </tr>

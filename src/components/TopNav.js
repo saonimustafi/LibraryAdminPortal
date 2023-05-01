@@ -60,20 +60,20 @@ function TopNav() {
       </a>      
       <a href="/" className="company-name">Admin Portal</a>  
       
-      <ul className="menu">
+      {/* <ul className="menu">
         <li className="menu-item">
           <Link to="/categories" className="menu-link">Categories</Link>
         </li>
         <li className="menu-item">
           <Link to="/contact-us" className="menu-link">Contact us</Link>
         </li>
-      </ul>
+      </ul> */}
 
       {isLoggedIn ? (
           <div className="user-dropdown-container">
           <Link to="#" className="user-dropdown-link" onClick={handleDropdown}>
             {currentUser.email && (
-              <p className="user-dropdown-hello">Hello, {currentUser.email.split('@').shift()}!</p>
+              <p className="user-dropdown-hello">Hello, {currentUser.email.split('@').shift()}</p>
             )}
           </Link>
           {showDropdown && (
