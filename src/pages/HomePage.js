@@ -10,18 +10,10 @@ function HomePage() {
   const [books, setBooks] = useState([])
   const searchRef = useRef(null);
   const navigate = useNavigate();
-  // const [requestedBookIDs, setRequestedBookIDs] = useState([]);
-  // const [isFetchRequestedBooksCompleted, setIsFetchRequestedBooksCompleted] = useState(false);
   const [currentUser, setCurrentUser] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const handleSearch = (event) => {
-  //   event.preventDefault();
-  //   if (searchTerm.trim()) {
-  //     navigate(`/search/${searchTerm}`);
-  //     setSearchTerm('');
-  //   }
-  // };
+
 
   useEffect(() => {        
     async function checkLoggedIn() {
@@ -116,21 +108,15 @@ function HomePage() {
       </div>
       <div className="book-grid">
       {isLoggedIn ? 
-          // !isFetchRequestedBooksCompleted ? (
-          //   <p>Loading...</p>
-          // ) : 
+           
           (
             <>
-              {/* {console.log("In HomePage.js: requestedBookIDs=" + requestedBookIDs)} */}
               {books.map((book) => {
-                // const isBookRequested = requestedBookIDs.includes(book.id);
-                // {console.log("In HomePage.js: book=" + book.title + " id="+book.id+" isBookRequested="+isBookRequested)}
                 return (
                   <Book
                     key={book.id}
                     book={book}
                     user_id={currentUser.id}
-                    // isBookRequested={isBookRequested}
                     isLoggedIn={isLoggedIn}
                   />
                 );
@@ -147,7 +133,6 @@ function HomePage() {
                   book={book}
                   user_id={currentUser.id}
                   isLoggedIn={isLoggedIn}
-                  // isFetchRequestedBooksCompleted={isFetchRequestedBooksCompleted}
                 />
               );
             })}
